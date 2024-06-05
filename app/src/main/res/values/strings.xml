@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">DigitalArtspace</string>
+    <string name="next_btn">Next</string>
+    <string name="back_btn">Back</string>
 </resources>
