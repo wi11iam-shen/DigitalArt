@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
@@ -22,12 +23,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.digitalartspace.ui.theme.DigitalArtspaceTheme
-import kotlin.math.abs
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,10 +50,17 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DigitalArtSpace(paintings: List<Painting>, modifier: Modifier = Modifier){
     var imageSource by remember { mutableStateOf(1)}
-    Column {
+    Column (modifier = Modifier.fillMaxWidth()){
         Image(painter = painterResource(paintings[imageSource].imageResourceid),
-            contentDescription = stringResource(paintings[imageSource].description))
+            contentDescription = stringResource(paintings[imageSource].title),
+            modifier = Modifier.fillMaxWidth()
+                .height(500.dp)
+                .padding(top =30.dp),
+            contentScale = ContentScale.FillBounds)
         Spacer(modifier.height(20.dp))
+        AuthorInfo(artpiece = stringResource(paintings[imageSource].title),
+            author = stringResource(paintings[imageSource].description),
+            year = stringResource(paintings[imageSource].year))
         Spacer(modifier.height(20.dp))
         Row(){
             Button(onClick = { imageSource = (imageSource-1)%paintings.size
@@ -70,7 +78,7 @@ fun DigitalArtSpace(paintings: List<Painting>, modifier: Modifier = Modifier){
 
 
 @Composable
-fun AuthorInfo(artpiece: String, author: String, year: Int, modifier: Modifier=Modifier){
+fun AuthorInfo(artpiece: String, author: String, year: String, modifier: Modifier=Modifier){
     val temp_string = author + " (" + year + ")"
     Box(modifier = Modifier){
         Column(){
@@ -85,6 +93,6 @@ fun AuthorInfo(artpiece: String, author: String, year: Int, modifier: Modifier=M
 @Composable
 fun Preview() {
     DigitalArtspaceTheme {
-        AuthorInfo("Test", "Test", 5555)
+        AuthorInfo("Test", "Test", "5555")
     }
 }
