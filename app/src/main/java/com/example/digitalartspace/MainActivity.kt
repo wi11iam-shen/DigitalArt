@@ -1,5 +1,15 @@
 package com.example.digitalartspace
 
+
+/*
+Lab 2 Project
+
+Created By: William Shen, Dominique Legaspi, Kyle Kekawa
+
+William: Created foundation, buttons, and simple layout, as well as composables
+Dom: Created formatting, color, and image cropping
+Kyle: Created XML files
+ */
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
