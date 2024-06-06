@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -62,15 +63,20 @@ fun DigitalArtSpace(paintings: List<Painting>, modifier: Modifier = Modifier){
         Box(modifier = modifier.fillMaxWidth()
             .padding(top = 30.dp, start = 10.dp, end = 10.dp)
             ) {
-            Image(
-                painter = painterResource(paintings[imageSource].imageResourceid),
-                contentDescription = stringResource(paintings[imageSource].title),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(500.dp)
-                    .clip(RoundedCornerShape(20.dp)),
-                contentScale = ContentScale.Crop
-            )
+            Box(modifier = Modifier.fillMaxWidth()
+                .height(500.dp)
+                .background(color = Color.LightGray)
+                .border(width = 2.dp, color = Color.Black)){
+                Image(
+                    painter = painterResource(paintings[imageSource].imageResourceid),
+                    contentDescription = stringResource(paintings[imageSource].title),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(500.dp)
+                        .clip(RoundedCornerShape(20.dp)),
+                    contentScale = ContentScale.Fit
+                )
+            }
         }
         Spacer(modifier.height(30.dp))
         AuthorInfo(artpiece = stringResource(paintings[imageSource].title),
